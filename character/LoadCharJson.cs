@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 using System.Globalization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using EffectComponents;
 
-namespace character_operations
+namespace CharacterOperations
 {
 
 
@@ -28,23 +29,26 @@ namespace character_operations
         [JsonProperty("temp_char2", NullValueHandling = NullValueHandling.Ignore)]
         public Base_Character TempChar2 { get; set; }
     }*/
-
-    public partial class Base_Character
+    
+    public partial class Base_Character 
     {
         [JsonProperty("name")]
         public string? Name { get; set; }
 
         [JsonProperty("hp")]
-        public int Hp { get; set; }
+        public int base_hp { get; set; }
 
         [JsonProperty("atk")]
-        public int Atk { get; set; }
+        public int base_atk { get; set; }
 
         [JsonProperty("def")]
-        public int Def { get; set; }
+        public int base_def { get; set; }
 
         [JsonProperty("spd")]
-        public int Spd { get; set; }
+        public int base_spd { get; set; }
+
+        [JsonProperty("max_energy")]
+        public int max_energy { get; set; }
 
         [JsonProperty("type")]
         public string Type { get; set; }
@@ -64,7 +68,9 @@ namespace character_operations
         [JsonProperty("set")]
         public string? Set { get; set; }
 
+        //note that i removed stats from being in a list, idk if that breaks something
+        //MAYBE CONVERT TO STAT STRUCTURE? not necessary now, but maybe important later
         [JsonProperty("stats")]
-        public Dictionary<string, double>[]? Stats { get; set; }
+        public Dictionary<string, double>? Stats { get; set; }
     }
 }
