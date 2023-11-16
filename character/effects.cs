@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EffectComponents
+namespace MiscOperations
 {
     //quick temp class for stat objects, instead of moving tuples around
     //may want to reorganize later with other structs
@@ -36,7 +36,10 @@ namespace EffectComponents
             this.stat.stat = stat; //haha im so good at naming convenctions 
             this.stat.value = value;
         }
-
+        public void end_effect()
+        {
+            condition = false;
+        }
         public virtual StatObj apply()
         {
             //effect is active
@@ -65,7 +68,7 @@ namespace EffectComponents
             else //if condition is not met
             {
                 return new StatObj("skip", 0);
-            }
+            } 
         }
         //ticks timer. ONLY USE AT END OF TURN, AS EXTRA ACTIONS DONT COUNT AS A NEW TURN
         public void tick_duration()

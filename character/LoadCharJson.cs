@@ -6,12 +6,9 @@ using System.Threading.Tasks;
 using System.Globalization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using EffectComponents;
 
 namespace CharacterOperations
 {
-
-
     public partial class LoadCharJson
     {
         [JsonProperty("Characters")]
@@ -49,6 +46,9 @@ namespace CharacterOperations
 
         [JsonProperty("max_energy")]
         public int max_energy { get; set; }
+
+        [JsonProperty("level")]
+        public int Level { get; set; }
 
         [JsonProperty("type")]
         public string Type { get; set; }
