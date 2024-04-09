@@ -1,0 +1,16 @@
+{
+    "Characters": [
+        {
+            "name": "yanqing",
+            "hp": 892,
+            "atk": 679,
+            "def": 412,
+            "spd": 109,
+            "max-energy": 140,
+            "type": "ice",
+            "light_cone": "na",
+            "equiptment": []
+        }
+    ],
+    "Loose_equiptment": []
+}

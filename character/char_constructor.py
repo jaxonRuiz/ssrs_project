@@ -1,15 +1,22 @@
 import json
+import os
 
 def makeCharacter():
     character = {}
     character['name'] = str(input("name: "))
+    if character['name'][-1] == "\r":
+        character['name'] = character["name"][:-1]
     character['hp'] = int(input("hp: "))
     character['atk'] = int(input("atk: "))
     character['def'] = int(input("def: "))
     character['spd'] = int(input("spd: "))
     character['max-energy'] = int(input("energy: "))
     character['type'] = str(input("type: "))
+    if character['type'][-1] == "\r":
+        character['type'] = character["type"][:-1]
     character['light_cone'] = input("light cone: ")
+    if character['light_cone'][-1] == "\r":
+        character['light_cone'] = character["light_cone"][:-1]
     character['equiptment'] = []
     return character
 
@@ -153,7 +160,7 @@ def makeEquiptment():
     equiptment["stats"] = e_stats
     return equiptment
     
-def createCharFile():
+def createCharFile(filename:str = "NONE"):
     output = {"Characters": [], "Loose_equiptment": []}
 
     print("making characters..")
@@ -163,31 +170,47 @@ def createCharFile():
 
         print("adding equiptment...")
         while True:
-            char["equiptment"].append(makeEquiptment)
             if input("continue making equiptment? [y/n]").lower() != "y":
+                print("No more equiptment")
                 break
             if len(char["equiptment"]) > 6:
                 break
+            char["equiptment"].append(makeEquiptment())
         output["Characters"].append(char)
         if input("continue creating characters? [y/n]").lower() != "y":
+            print("no more characters")
             break
+
 
     print("making loose equiptment..")
     while True:
-        output["Loose_equiptment"].append(makeCharacter())
-        print("\nequiptment created!")
-        if input("continue creating equiptment? [y/n]").lower() != "y":
+        if input("create loose equiptment? [y/n]").lower() != "y":
+            print("no loose equiptment")
             break
+        output["Loose_equiptment"].append(makeEquiptment())
+        print("\nequiptment created!")
+    
+    json_object = json.dumps(output, indent=4)
+    # saving to file if name given
+    if filename != "NONE":
+        fullpath = os.getcwd() + "/saved_jsons/" + filename + ".json"
+        with open(fullpath, "w") as outfile:
+            outfile.write(json_object)
+
+    return json_object
 
 # print(raw["Characters"][0])
 if __name__ == "__main__":
-    path = "character\\bin\\Debug\\net6.0\\emptycharacter.json"
+    '''path = "saved_jsons\\emptycharacter.json"
     print(path)
-    with open(path) as f:
+    with open(path, "w") as f:
         raw = json.load(f)
 
     print(type(raw))
     print(raw)
+'''
 
-
-    createCharFile()
+    # run this for shortcut
+    # python3 char_constructor.py < shortcut.txt
+    file = createCharFile("MainTeam")
+    print(file)

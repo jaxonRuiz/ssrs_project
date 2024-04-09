@@ -40,10 +40,12 @@ class Run
         tester.start();
         //tester.test_names01();
         tester.print_characters();
-        tester.test_special_character_frame();
-        tester.test_setup();
+        //tester.test_special_character_frame();
+        //tester.test_setup();
 
         tester.test_details();
+
+        Console.WriteLine();
         tester.test_attack();
 
     }
@@ -54,8 +56,13 @@ class Tester
     public Base_Character character;
     public void start()
     {
-        string file_name = Path.Combine(Directory.GetCurrentDirectory(), "load_char.json");
-        string json = File.ReadAllText(file_name);
+        // opening saved character files (scuffy rn)
+        string workingDirectory = Environment.CurrentDirectory;
+        string projectDirectory = Directory.GetParent(workingDirectory).Parent.Parent.FullName;
+        string file_name = Path.Combine(projectDirectory, "//saved_jsons//just_yanqing.json");
+        string temppathfuckmylife = "C:\\Users\\bluea\\Documents\\Coding\\RealStuff\\FullProjects\\ssrs_project\\character\\saved_jsons\\just_yanqing.json";
+        Console.WriteLine(temppathfuckmylife);
+        string json = File.ReadAllText(temppathfuckmylife);
         Console.WriteLine(json);
         data = JsonConvert.DeserializeObject<LoadCharJson>(json);
         
